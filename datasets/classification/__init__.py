@@ -173,7 +173,9 @@ class DataLoaderFactoryV6:
             target_transform=(not vid),  # VID task does not need labels
             device=device,
         )
-        if size==112:
+        st_cfg = self.cfg.get_config('spatial_transforms')
+        st_size = st_cfg.get_int('size')
+        if st_size==112:
             video_dataset = VideoDataset_constrained_mask_tracking_sal_light_112(
                 samples=ds,
                 temporal_transform=temporal_transform,
